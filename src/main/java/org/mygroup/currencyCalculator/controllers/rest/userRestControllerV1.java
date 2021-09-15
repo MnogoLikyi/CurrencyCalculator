@@ -1,5 +1,6 @@
 package org.mygroup.currencyCalculator.controllers.rest;
 
+import org.hibernate.internal.SessionFactoryImpl;
 import org.mygroup.currencyCalculator.models.userModels.User;
 import org.mygroup.currencyCalculator.services.userService;
 import org.mygroup.currencyCalculator.springSecurity.dto.userControllerDto;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.persistence.EntityManagerFactory;
+
 /**
  * REST Controller for user_role access.
  *
@@ -27,6 +31,9 @@ public class userRestControllerV1 {
 
     @GetMapping("/{id}")
     public ResponseEntity<userControllerDto> getUserById(@PathVariable("id") Long id) {
+        
+
+
         User user = service.findById(id);
 
         if (user == null) {

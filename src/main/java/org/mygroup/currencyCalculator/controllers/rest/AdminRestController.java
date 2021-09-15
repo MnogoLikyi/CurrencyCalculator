@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
  * */
 @RestController
 @RequestMapping("/api/v1/admin")
-public class adminRestController {
+public class AdminRestController {
 
 
     private final userService service;
 
     @Autowired
-    public adminRestController(userService service) {
+    public AdminRestController(userService service) {
         this.service = service;
     }
 
