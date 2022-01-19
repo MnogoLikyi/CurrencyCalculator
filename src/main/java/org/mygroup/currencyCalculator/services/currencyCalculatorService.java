@@ -38,7 +38,7 @@ public class currencyCalculatorService {
 
 
     public void updateCurrencies() throws IOException, InterruptedException {
-        ArrayList<currencyRate> currencyRates = currencyHelper.getCurrencyRates();
+        ArrayList<currencyRate> currencyRates = (ArrayList<currencyRate>) currencyHelper.getCurrencyRates();
         if (currencyRates.size() != 0) {
             this.repository.deleteAll();
             addExchangeVariants(currencyRates);
@@ -47,11 +47,14 @@ public class currencyCalculatorService {
 
     public currencyRate getCurrencyRate(Currency basecurrency, Currency convertingcurrency) {
 
-        Optional<currencyRate> crr = repository.findByBaseCurrencyAndConvertingCurrency(basecurrency, convertingcurrency);
-       if (crr != null)
+       Optional<currencyRate> opt = repository.findByBaseCurrencyAndConvertingCurrency(basecurrency, convertingcurrency);
+
+       if (opt.isEmpty())
        {
-        return crr.get();
+        return opt.get();
        }
+
+
        return null;
     }
 
@@ -60,10 +63,11 @@ public class currencyCalculatorService {
         currencyRate cr = null;
         Optional<currencyRate> optional = repository.findById(1L);
 
-        if (optional != null) {
+        if (optional != null && !optional.isEmpty()) {
             cr = optional.get();
         return cr.getLastupdated();
         }
+
 
         return null;
     }

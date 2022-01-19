@@ -45,9 +45,9 @@ public class currencyHelper
         return model;
     }
 
-    public static ArrayList<currencyRate> getCurrencyRates() throws IOException, InterruptedException {
+    public static List<currencyRate> getCurrencyRates() throws IOException, InterruptedException {
 
-        ArrayList<currencyRate> currencyRates = new ArrayList<>();
+        List<currencyRate> currencyRates = new ArrayList<>();
         Currency[] currencies = Currency.values();
         Long id = 0L;
         for (int i = 0; i < currencies.length ; i++) {

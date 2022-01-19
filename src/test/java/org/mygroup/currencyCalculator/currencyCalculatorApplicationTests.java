@@ -44,8 +44,8 @@ class currencyCalculatorApplicationTests {
         // Create user
         User user1 = new User();
         user1.setFirstName("Samvel");
-        user1.setLastName("Kazaryan");
-        user1.setUsername("mnogoLikyi");
+        user1.setLastName("Ghazaryan");
+        user1.setUsername("testusername");
         user1.setEmail("sammuki@mail.ru");
         user1.setPassword(encoder.encode("test"));
         user1.setRoles(roleList);
@@ -53,7 +53,6 @@ class currencyCalculatorApplicationTests {
         //Add user to database
         testUserService.addUser(user1);
 
-        System.out.println("Success");
 
     }
 

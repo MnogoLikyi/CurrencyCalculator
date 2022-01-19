@@ -28,8 +28,9 @@ public class CalcRestControllerV1 {
     }
 
     @GetMapping("/exchange/{amount}/{base}/{converting}")
-    public ResponseEntity<String> test(@PathVariable("base") String base,
+    public ResponseEntity<String> test(
                                        @PathVariable("amount") String amount,
+                                       @PathVariable("base") String base,
                                        @PathVariable("converting") String converting
                                        )
             throws IOException, InterruptedException
@@ -38,10 +39,10 @@ public class CalcRestControllerV1 {
         operations op = new operations(service);
         String result = op.exchange(amount, base, converting);
         if (result == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            service.updateCurrencies();
         }
         
         return new ResponseEntity<>(result, HttpStatus.OK);
-
     }
 }

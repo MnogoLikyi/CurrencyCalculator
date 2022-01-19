@@ -19,17 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  * Authentication REST controller with Login functionality.
  *
- * @author  Samvel Ghazaryan
+ * @author Samvel Ghazaryan
  * @version 1.0
- * */
+ */
 @RestController
-@RequestMapping(value = " ")
+@RequestMapping(value = "api/v1/auth")
 public class AuthenticationRestControllerV1 {
 
-    private  AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
     private final userService service;
 
@@ -42,7 +43,8 @@ public class AuthenticationRestControllerV1 {
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody authenticationRequestDTO requestDto) throws IOException, InterruptedException {
+    public ResponseEntity login(@RequestBody authenticationRequestDTO requestDto)
+            throws IOException, InterruptedException {
         try {
             String username = requestDto.getUsername();
 
@@ -58,10 +60,12 @@ public class AuthenticationRestControllerV1 {
             Map<Object, Object> response = new HashMap<>();
             response.put("username", username);
             response.put("token", token);
+            response.put("roles", user.getRoles().stream().map(m -> m.getName()));
 
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username or password");
         }
     }
+
 }
